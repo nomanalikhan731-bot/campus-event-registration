@@ -41,10 +41,16 @@ class RegistrationService {
     }
 
     findRegistration(regNo) {
-        return this.registrations.find(
-            student => student.registrationNumber === regNo
-        );
+    if (!regNo || !regNo.trim()) {
+        return null;
     }
+
+    return this.registrations.find(
+        student =>
+            student.registrationNumber.toLowerCase() ===
+            regNo.trim().toLowerCase()
+    ) || null;
+}
 }
 
 module.exports = RegistrationService;
